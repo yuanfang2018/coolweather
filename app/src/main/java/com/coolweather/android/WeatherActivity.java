@@ -2,11 +2,15 @@ package com.coolweather.android;
 
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -39,8 +43,13 @@ public class WeatherActivity extends AppCompatActivity {
 
     private TextView ganmaoText;
 
+    private  String countryName;
+
     public SwipeRefreshLayout swipeRefresh;
     private String mCountryName;
+
+    public DrawerLayout drawerLayout;
+    private Button navButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +65,8 @@ public class WeatherActivity extends AppCompatActivity {
         ganmaoText = findViewById(R.id.ganmao_text);
         swipeRefresh = findViewById(R.id.swipe_refresh);
         swipeRefresh.setColorSchemeResources(R.color.colorPrimary);
+        drawerLayout = findViewById(R.id.drawer_layout);
+        navButton = findViewById(R.id.nav_button);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         String weatherString = prefs.getString("weather", null);
         if (weatherString != null) {
@@ -65,9 +76,9 @@ public class WeatherActivity extends AppCompatActivity {
             showWeatherInfo(weather);
         } else {
             //无缓存时去服务器查询天气
-            mCountryName = getIntent().getStringExtra("countryName");
+            countryName = getIntent().getStringExtra("countryName");
             weatherLayout.setVisibility(View.INVISIBLE);
-            requestWeather(mCountryName);
+            requestWeather(countryName);
         }
         /**
          * 下拉监听器
@@ -75,7 +86,18 @@ public class WeatherActivity extends AppCompatActivity {
         swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                requestWeather(mCountryName);
+                countryName = getIntent().getStringExtra("countryName");
+                if(countryName != null){
+                    requestWeather(countryName);
+                }else{
+                    requestWeather(mCountryName);
+                }
+            }
+        });
+        navButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                drawerLayout.openDrawer(GravityCompat.START);
             }
         });
     }

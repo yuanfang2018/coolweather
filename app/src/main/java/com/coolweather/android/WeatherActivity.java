@@ -2,6 +2,7 @@ package com.coolweather.android;
 
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -38,6 +39,9 @@ public class WeatherActivity extends AppCompatActivity {
 
     private TextView ganmaoText;
 
+    public SwipeRefreshLayout swipeRefresh;
+    private String mCountryName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,18 +54,30 @@ public class WeatherActivity extends AppCompatActivity {
         weatherInfoText = findViewById(R.id.weather_info_text);
         forecastLayout = findViewById(R.id.forecast_layout);
         ganmaoText = findViewById(R.id.ganmao_text);
+        swipeRefresh = findViewById(R.id.swipe_refresh);
+        swipeRefresh.setColorSchemeResources(R.color.colorPrimary);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         String weatherString = prefs.getString("weather", null);
         if (weatherString != null) {
             //有缓存时直接解析天气数据
             Weather weather = Utility.handleWeatherResponse(weatherString);
+            mCountryName = weather.data.cityName;
             showWeatherInfo(weather);
         } else {
             //无缓存时去服务器查询天气
-            String countryName = getIntent().getStringExtra("countryName");
+            mCountryName = getIntent().getStringExtra("countryName");
             weatherLayout.setVisibility(View.INVISIBLE);
-            requestWeather(countryName);
+            requestWeather(mCountryName);
         }
+        /**
+         * 下拉监听器
+         */
+        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                requestWeather(mCountryName);
+            }
+        });
     }
         /**
          * 根据天气id请求城市天气信息
@@ -77,6 +93,7 @@ public class WeatherActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         Toast.makeText(WeatherActivity.this, "获取天气信息失败", Toast.LENGTH_SHORT).show();
+                        swipeRefresh.setRefreshing(false);
                     }
                 });
             }
@@ -96,6 +113,7 @@ public class WeatherActivity extends AppCompatActivity {
                         } else {
                             Toast.makeText(WeatherActivity.this, "获取天气信息失败", Toast.LENGTH_SHORT).show();
                         }
+                        swipeRefresh.setRefreshing(false);
                     }
                 });
             }

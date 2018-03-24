@@ -74,7 +74,7 @@ public class Utility {
                     JSONObject countryObject = allCountries.getJSONObject(i);
                     Country country = new Country();
                     country.setCountryName(countryObject.getString("name"));
-                    country.setWeatherId(countryObject.getString("weather_id"));
+                    country.setWeatherId(countryObject.getString("weather_id").substring(2));
                     country.setCityId(cityId);
                     country.save();
                 }

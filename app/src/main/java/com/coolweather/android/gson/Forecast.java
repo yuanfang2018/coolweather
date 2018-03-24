@@ -10,17 +10,36 @@ public class Forecast {
 
     public String date;
 
+    public String sunrise;
+
     @SerializedName("high")
-    public String highWendu;
+    public int highWendu;
 
     @SerializedName("low")
-    public String lowWendu;
+    public int lowWendu;
 
-    public String fenli;
+    public String sunset;
 
-    public String fengxiang;
+    public DayAndNight night;
 
-    @SerializedName("type")
-    public String weatherType;
+    public int aqi;
+
+    public DayAndNight day;
+
+    public class DayAndNight{
+        @SerializedName("wthr")
+        public String weatherType;
+
+        @SerializedName("wp")
+        public String windSpeed;
+
+        @SerializedName("type")
+        public int weatherTypeInt;
+
+        @SerializedName("wd")
+        public String windDirection;
+
+        public String notice;
+    }
 
 }

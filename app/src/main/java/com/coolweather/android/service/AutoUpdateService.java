@@ -51,9 +51,9 @@ public class AutoUpdateService extends Service {
         if(weatherString != null){
             //有缓存时直接解析天气数据
             Weather weather = Utility.handleWeatherResponse(weatherString);
-            String countryName = weather.data.cityName;
+            String weatherId = weather.city.citykey;
 
-            String weatherUrl = "http://wthrcdn.etouch.cn/weather_mini?city=" + countryName;
+            String weatherUrl = "http://zhwnlapi.etouch.cn/Ecalender/api/v2/weather?date=20180324&citykey=" + weatherId;
             HttpUtil.sendOkHttpRequest(weatherUrl, new Callback() {
                 @Override
                 public void onFailure(Call call, IOException e) {
@@ -65,7 +65,7 @@ public class AutoUpdateService extends Service {
                     String responseText = response.body().string();
                     Weather weather1 = Utility.handleWeatherResponse(responseText);
 
-                    if(weather1 != null && weather1.status == 1000){
+                    if(weather1 != null && weather1.city.status == 1000){
                         SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(AutoUpdateService.this).edit();
                         editor.putString("weather", responseText);
                         editor.apply();

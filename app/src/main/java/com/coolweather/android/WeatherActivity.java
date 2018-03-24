@@ -45,10 +45,10 @@ public class WeatherActivity extends AppCompatActivity {
 
     private TextView ganmaoText;
 
-    private  String countryName;
+    private  String weatherId;
 
     public SwipeRefreshLayout swipeRefresh;
-    private String mCountryName;
+    private String mWeatherId;
 
     public DrawerLayout drawerLayout;
     private Button navButton;
@@ -74,13 +74,13 @@ public class WeatherActivity extends AppCompatActivity {
         if (weatherString != null) {
             //有缓存时直接解析天气数据
             Weather weather = Utility.handleWeatherResponse(weatherString);
-            mCountryName = weather.data.cityName;
+            mWeatherId = weather.city.citykey;
             showWeatherInfo(weather);
         } else {
             //无缓存时去服务器查询天气
-            countryName = getIntent().getStringExtra("countryName");
+            weatherId = getIntent().getStringExtra("weather_id");
             weatherLayout.setVisibility(View.INVISIBLE);
-            requestWeather(countryName);
+            requestWeather(weatherId);
         }
         /**
          * 下拉监听器
@@ -88,11 +88,11 @@ public class WeatherActivity extends AppCompatActivity {
         swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                countryName = getIntent().getStringExtra("countryName");
-                if(countryName != null){
-                    requestWeather(countryName);
+                weatherId = getIntent().getStringExtra("weather_id");
+                if(weatherId != null){
+                    requestWeather(weatherId);
                 }else{
-                    requestWeather(mCountryName);
+                    requestWeather(mWeatherId);
                 }
             }
         });
@@ -107,8 +107,8 @@ public class WeatherActivity extends AppCompatActivity {
          * 根据天气id请求城市天气信息
          */
 
-    public void requestWeather(final String countryName) {
-        String weatherUrl = "http://wthrcdn.etouch.cn/weather_mini?city=" + countryName;
+    public void requestWeather(final String weatherId) {
+        String weatherUrl = "http://zhwnlapi.etouch.cn/Ecalender/api/v2/weather?date=20180324&citykey=" + weatherId;
         HttpUtil.sendOkHttpRequest(weatherUrl, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -129,7 +129,7 @@ public class WeatherActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        if (weather != null && weather.status == 1000) {
+                        if (weather != null && weather.city.status == 1000) {
                             SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(WeatherActivity.this).edit();
                             editor.putString("weather", responseText);
                             editor.apply();
@@ -147,27 +147,27 @@ public class WeatherActivity extends AppCompatActivity {
      * 处理并展示Weather实体类中的数据
      */
     private void showWeatherInfo(Weather weather){
-        String cityName = weather.data.cityName;
+        String cityName = weather.city.cityName;
         //String updateTima = weather.update.localDate;
-        String degree = weather.data.wendu + "℃";
-        String weatherInfo = weather.data.forecastList.get(0).weatherType;
+        String degree = weather.now.temperature + "℃";
+        String weatherInfo = weather.now.weatherType;
         titleCity.setText(cityName);
         degreeText.setText(degree);
         weatherInfoText.setText(weatherInfo);
         forecastLayout.removeAllViews();
-        for(Forecast forecast : weather.data.forecastList){
+        for(Forecast forecast : weather.forecastList){
             View view = LayoutInflater.from(this).inflate(R.layout.forecast_item, forecastLayout, false);
             TextView dateText = view.findViewById(R.id.date_text);
             TextView infoText = view.findViewById(R.id.info_text);
             TextView maxText = view.findViewById(R.id.max_text);
             TextView minText = view.findViewById(R.id.min_text);
             dateText.setText(forecast.date);
-            infoText.setText(forecast.weatherType);
-            maxText.setText(forecast.highWendu);
-            minText.setText(forecast.lowWendu);
+            infoText.setText(forecast.day.weatherType);
+            maxText.setText("" + forecast.highWendu);
+            minText.setText("" + forecast.lowWendu);
             forecastLayout.addView(view);
         }
-        String ganmao = "感冒：" + weather.data.ganmao;
+        String ganmao = weather.suggestionList.get(0).suggestionName + "：" + weather.suggestionList.get(0).suggestionDescribe;
         ganmaoText.setText(ganmao);
         weatherLayout.setVisibility(View.VISIBLE);
         Intent intent = new Intent(this, AutoUpdateService.class);

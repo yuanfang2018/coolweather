@@ -9,9 +9,21 @@ import java.util.List;
  */
 
 public class Weather {
-    public int status;
+    @SerializedName("indexes")
+    public List<Suggestion> suggestionList;
 
-    public Data data;
+    @SerializedName("meta")
+    public City city;
 
-    public String desc;
+    @SerializedName("forecast")
+    public List<Forecast> forecastList;
+
+    @SerializedName("hourfc")
+    public List<EveryHour> everyHourList;
+
+    @SerializedName("evn")
+    public Enviroment enviroment;
+
+    @SerializedName("observe")
+    public Now now;
 }

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="?attr/actionBarSize">
+    android:layout_height="?attr/actionBarSize"
+    android:background="@color/colorPrimary">
 
     <Button
         android:id="@+id/nav_button"
@@ -10,14 +11,14 @@
         android:layout_marginLeft="10dp"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
-        android:background="@mipmap/ic_launcher"/>
+        android:background="@mipmap/viewlisto"/>
 
     <TextView
         android:id="@+id/title_city"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:textColor="#fff"
+        android:textColor="@color/colorFontLight"
         android:textSize="20sp"/>
 
     <TextView
@@ -27,6 +28,6 @@
         android:layout_marginRight="10dp"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:textColor="#fff"
+        android:textColor="@color/colorFontLight"
         android:textSize="16sp"/>
 </RelativeLayout>

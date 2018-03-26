@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.coolweather.android.WeatherActivity"
-    android:background="@color/colorPrimary">
+    android:background="@color/colorDark"
+    android:fitsSystemWindows="true">
 
     <android.support.v4.widget.DrawerLayout
         android:id="@+id/drawer_layout"
@@ -48,7 +49,7 @@
             android:name="com.coolweather.android.ChooseAreaFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="start"/>
+            android:layout_gravity="start" />
 
     </android.support.v4.widget.DrawerLayout>
 

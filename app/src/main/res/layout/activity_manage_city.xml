@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorDark"
+    android:fitsSystemWindows="true">
+
+    <include layout="@layout/title"/>
+
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="?android:actionBarSize"-->
+        <!--android:background="@color/colorPrimary">-->
+
+        <!--<Button-->
+            <!--android:id="@+id/owned_city_back_button"-->
+            <!--android:layout_width="25dp"-->
+            <!--android:layout_height="25dp"-->
+            <!--android:layout_marginLeft="10dp"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:background="@mipmap/ic_arrow_back_black_36dp"/>-->
+
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerInParent="true"-->
+            <!--android:textColor="@color/colorFontDark"-->
+            <!--android:textSize="20sp"-->
+            <!--android:text="选择城市"/>-->
+
+    <!--</RelativeLayout>-->
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="4dp">
+
+            <ListView
+                android:id="@+id/owned_city_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:divider="@null"
+                android:listSelector="#00000000">
+            </ListView>
+
+        </android.support.v7.widget.LinearLayoutCompat>
+
+        <!--<android.support.design.widget.FloatingActionButton-->
+            <!--android:id="@+id/floatingActionButton2"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginBottom="15dp"-->
+            <!--android:layout_marginEnd="15dp"-->
+            <!--android:clickable="true"-->
+            <!--app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:srcCompat="@mipmap/plus" />-->
+
+    </android.support.constraint.ConstraintLayout>
+
+
+
+</LinearLayout>

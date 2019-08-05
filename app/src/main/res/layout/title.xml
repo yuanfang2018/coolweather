@@ -1,33 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="?attr/actionBarSize"
-    android:background="@color/colorPrimary">
+    android:layout_height="?android:actionBarSize"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:theme="@style/AppTheme">
 
-    <Button
-        android:id="@+id/nav_button"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginLeft="10dp"
-        android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
-        android:background="@mipmap/viewlisto"/>
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/weather_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?android:actionBarSize">
 
-    <TextView
-        android:id="@+id/title_city"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:textColor="@color/colorFontLight"
-        android:textSize="20sp"/>
+        <!--<RelativeLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent">-->
 
-    <TextView
-        android:id="@+id/title_update_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="10dp"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:textColor="@color/colorFontLight"
-        android:textSize="16sp"/>
-</RelativeLayout>
+            <!--<Button-->
+                <!--android:id="@+id/nav_button"-->
+                <!--android:layout_width="24dp"-->
+                <!--android:layout_height="24dp"-->
+                <!--android:layout_marginLeft="16dp"-->
+                <!--android:layout_alignParentLeft="true"-->
+                <!--android:background="@mipmap/viewlisto"/>-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/title_city"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="72dp"-->
+                <!--android:layout_marginBottom="0dp"-->
+                <!--android:textColor="@color/colorFontLight"-->
+                <!--android:text="fajsdfkja"-->
+                <!--android:textSize="20sp"/>-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/title_update_time"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginRight="10dp"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:textColor="@color/colorFontLight"-->
+                <!--android:text="ajfsdlfja"-->
+                <!--android:textSize="16sp"/>-->
+
+        <!--</RelativeLayout>-->
+
+    </android.support.v7.widget.Toolbar>
+</android.support.design.widget.AppBarLayout>

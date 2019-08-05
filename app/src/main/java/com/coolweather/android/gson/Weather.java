@@ -15,6 +15,8 @@ public class Weather {
     @SerializedName("meta")
     public City city;
 
+    public Alarm alarm;
+
     @SerializedName("forecast")
     public List<Forecast> forecastList;
 

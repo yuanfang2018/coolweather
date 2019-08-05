@@ -5,5 +5,11 @@
     <color name="colorDark">#EEEEEE</color>
     <color name="colorFontLight">#9A9A9A</color>
     <color name="colorFontDark">#464646</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#FAFAFA</color>
+    <color name="优">#72B963</color>
+    <color name="良">#E1C556</color>
+    <color name="轻度污染">#E6855C</color>
+    <color name="中度污染">#BE5156</color>
+    <color name="重度污染">#A24975</color>
+    <color name="严重污染">#823D47</color>
 </resources>

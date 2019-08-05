@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -22,7 +23,7 @@ import java.util.List;
 
 import static org.litepal.LitePalApplication.getContext;
 
-public class ChooseCityActivity extends AppCompatActivity {
+public class AddCityActivity extends AppCompatActivity {
 
     private ListView listView;
     private ArrayAdapter<String> adapter;
@@ -36,7 +37,7 @@ public class ChooseCityActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().getDecorView().setSystemUiVisibility( View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-        setContentView(R.layout.activity_choose_city);
+        setContentView(R.layout.activity_add_city);
 
         listView = findViewById(R.id.city_listview);
         toolbar = findViewById(R.id.weather_toolbar);
@@ -57,7 +58,7 @@ public class ChooseCityActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Country country = countryList.get(i);
                 if(!Utility.handleCountryOwnedResponse(country)){
-                    Toast.makeText(ChooseCityActivity.this,"城市已存在", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddCityActivity.this,"城市已存在", Toast.LENGTH_SHORT).show();
                 }else{
                     finish();
                 }
@@ -95,6 +96,17 @@ public class ChooseCityActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 }

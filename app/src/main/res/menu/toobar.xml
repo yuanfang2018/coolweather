@@ -2,8 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/city"
-        android:icon="@mipmap/city"
-        android:title="City"
-        app:showAsAction="always"/>
+        android:id="@+id/notification"
+        android:title="预警"
+        app:showAsAction="always"
+        android:icon="@mipmap/ic_notifications_red_black_48dp"/>
+    <item
+        android:id="@+id/about"
+        android:title="关于"
+        app:showAsAction="never"/>
 </menu>
